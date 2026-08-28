@@ -14,14 +14,13 @@ app.use('*', logger(console.log));
 const supabase = createClient(Deno.env.get('SUPABASE_URL'), Deno.env.get('SUPABASE_SERVICE_ROLE_KEY'));
 
 // SMTP Configuration for Emails
-// TODO: Replace these with your actual Google Workspace / Gmail SMTP details
 const transporter = createTransport({
   host: "smtp.gmail.com",
   port: 465,
   secure: true,
   auth: {
-    user: "admin@deniloans.co.za", // REPLACE WITH YOUR EMAIL
-    pass: "nnti ahmo ffjv jumc",     // REPLACE WITH YOUR APP PASSWORD
+    user: Deno.env.get('SMTP_USER'),
+    pass: Deno.env.get('SMTP_PASSWORD'),
   },
 });
 
@@ -1806,8 +1805,8 @@ app.post('/make-server-1ed353c1/admin/verify-identity', requireAdmin, async (c) 
 
     // Configuration
     const url = "https://apis.experian.co.za/IDVService?wsdl";
-    const username = "35184-int";
-    const password = '+#=Ol54cVRiL';
+    const username = Deno.env.get('EXPERIAN_INT_USERNAME');
+    const password = Deno.env.get('EXPERIAN_INT_PASSWORD');
     const myOrigin = "DeniLoans";
     const version = "1.0";
     const identityType = "SID";
@@ -1896,8 +1895,8 @@ app.post('/make-server-1ed353c1/admin/get-credit-score', requireAdmin, async (c)
 
     // Configuration
     const url = "https://apis.experian.co.za/GetPersonScore";
-    const username = "35184-int";
-    const password = '+#=Ol54cVRiL';
+    const username = Deno.env.get('EXPERIAN_INT_USERNAME');
+    const password = Deno.env.get('EXPERIAN_INT_PASSWORD');
     const myOrigin = "DeniLoans";
     const version = "1.0";
     const resultType = "json";
@@ -1992,8 +1991,8 @@ app.post('/make-server-1ed353c1/admin/account-verification', requireAdmin, async
 
     // Configuration
     const url = "https://apis-uat.experian.co.za/AVSService?wsdl";
-    const username = "2903-uat";
-    const password = '4O2@Rp43%$yi';
+    const username = Deno.env.get('EXPERIAN_UAT_USERNAME');
+    const password = Deno.env.get('EXPERIAN_UAT_PASSWORD');
     const myOrigin = "DeniLoans";
     const version = "1.0";
     const submissionType = "RS";
@@ -2094,8 +2093,8 @@ app.post('/make-server-1ed353c1/admin/financial-snapshot', requireAdmin, async (
 
     // Configuration
     const url = "https://apis-uat.experian.co.za/FinSnapService";
-    const username = "2903-uat";
-    const password = '4O2@Rp43%$yi';
+    const username = Deno.env.get('EXPERIAN_UAT_USERNAME');
+    const password = Deno.env.get('EXPERIAN_UAT_PASSWORD');
     const myOrigin = "DeniLoans";
     const version = "1.0";
 
